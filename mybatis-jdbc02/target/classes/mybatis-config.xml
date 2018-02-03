@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration  
+	PUBLIC "-//mybatis.org//DTD Config 3.0//EN"  
+	"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+	<!-- 引入资源文件方式，定义常量(推荐使用) -->
+	<properties resource="db.properties"></properties>
+	<!--
+		 通过properties定义
+		org.xml.sax.SAXParseException; lineNumber: 15; columnNumber: 109; The reference to entity "characterEncoding" must end with the ';'
+		注意中间那个“&”，在xml中这个是读不出的，正确写法将“&”转义“&amp;”
+	-->
+	<!-- 
+	<properties>
+		<property name="jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
+		<property name="jdbc.username" value="root"/>
+		<property name="jdbc.password" value="root"/>
+		<property name="jdbc.url" value="jdbc:mysql://localhost:3306/hpugs?serverTimezone=UTC&amp;characterEncoding=utf8&amp;useUnicode=true&amp;useSSL=false"/>
+	</properties>
+	-->
+	
+	<!-- 设置别名 -->
+	<typeAliases>
+		<!-- 实体类引入 -->
+		<!-- <typeAlias alias="User" type="com.hpugs.mybatis.pojo.User"/> -->
+		<!-- 包引入(推荐使用) -->
+		<package name="com.hpugs.mybatis.pojo"/>
+	</typeAliases>
+	
+	<!-- 配置数据库连接环境 -->
+	<environments default="development">
+	  <!-- 开发环境 -->
+	  <environment id="development">
+	    <transactionManager type="JDBC"/>
+	    <dataSource type="POOLED">
+	      <property name="driver" value="${jdbc.driver}"/>
+	      <property name="url" value="${jdbc.url}"/>
+	      <property name="username" value="${jdbc.username}"/>
+	      <property name="password" value="${jdbc.password}"/>
+	    </dataSource>
+	  </environment>
+	  <!-- 测试环境 -->
+	  <environment id="test">
+	    <transactionManager type="JDBC"/>
+	    <dataSource type="POOLED">
+	      <property name="driver" value="${jdbc.driver}"/>
+	      <property name="url" value="${jdbc.url}"/>
+	      <property name="username" value="${jdbc.username}"/>
+	      <property name="password" value="${jdbc.password}"/>
+	    </dataSource>
+	  </environment>
+	</environments>
+	
+	<mappers>
+		<!-- 资源文件方式引入 -->
+		<!-- <mapper resource="com/hpugs/mybatis/mapper/IUserMapper.xml"/> -->
+		<!-- 接口方式引入 -->
+		<!-- <mapper class="com.hpugs.mybatis.mapper.IUserMapper"/> -->
+		<!-- 包方式引入(推荐使用) -->
+		<package name="com.hpugs.mybatis.mapper"/>
+	</mappers>
+
+</configuration>

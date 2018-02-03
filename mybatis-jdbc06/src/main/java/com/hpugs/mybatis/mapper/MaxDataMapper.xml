@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hpugs.mybatis.mapper.IMaxDataMapper">
+
+	<!-- 
+		1、size:表示缓存cache中容纳的最大元素个数，默认1024个
+		2、flushInterval:定义缓存的刷新周期，以毫秒记
+		3、eviction:定义缓存的移除机制，默认LRU（最近最少使用），还有FIFO（先进先出）
+		4、readOnly:默认为false, 设置为true，则缓存只能读
+	 -->
+	<cache size="1024" flushInterval="60000" eviction="LRU" readOnly="false"></cache>
+  
+  	<!-- 
+  		flushCache：如果设成true，当语句调用时一级二级缓存都会被清理掉。select语句默认是false
+		useCache：如果设成true，语句调用的结果会缓存在二级缓存里。select语句默认是true
+  	 -->
+	<insert id="insertMaxData" parameterType="MaxData" flushCache="true">
+		insert into max_data (pic, remark) values (#{pic}, #{remark})
+	</insert>
+	
+	<select id="getMaxDataById" parameterType="Integer" resultType="MaxData" useCache="true" flushCache="false">
+		select * from max_data where id = #{id}
+	</select>
+  
+</mapper>

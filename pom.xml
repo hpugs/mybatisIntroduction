@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.hpugs.mybatis</groupId>
+  <artifactId>mybatis</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>pom</packaging>
+  <modules>
+  	<module>mybatis-commons</module>
+  	<module>mybatis-jdbc01</module>
+    <module>mybatis-pojo</module>
+    <module>mybatis-jdbc02</module>
+    <module>mybatis-jdbc03</module>
+
+    <module>mybatis-jdbc04</module>
+    <module>mybatis-jdbc05</module>
+    
+    <module>mybatis-jdbc07</module>
+    
+  </modules>
+</project>

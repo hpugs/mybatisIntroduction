@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hpugs.mybatis.mapper.IUserMapper">
+
+	  <resultMap type="User" id="user">
+		  <id property="id" column="id"/>
+		  <result property="name" column="name"/>
+		  <result property="phone" column="phone"/>
+		  <result property="pwd" column="pwd"/>
+		  <result property="address" column="address"/>
+		  <result property="remark" column="remark"/>
+	  </resultMap>
+
+	  <select id="searchUserByParams01" parameterType="Map" resultType="user">
+	    select * from user 
+	    	where grade_id = #{gradeId}
+	    	<if test="null!=name">
+	    		and name like #{name}
+	    	</if>
+	    	<if test="null!=state">
+	    		and state = #{state}
+	    	</if>
+	  </select>
+	  
+	  <select id="searchUserByParams02" parameterType="Map" resultType="user">
+	    select * from user 
+	    	<choose>
+	    		<when test="null!=gradeId">
+	    			where grade_id = #{gradeId}
+	    		</when>
+	    		<when test="null!=name">
+	    			where name like #{name}
+	    		</when>
+	    		<when test="null!=state">
+	    			where state = #{state}
+	    		</when>
+	    		<otherwise>
+	    			where state = 1
+	    		</otherwise>
+	    	</choose>
+	  </select>
+	  
+	  <select id="searchUserByParams03" parameterType="Map" resultType="user">
+	    select * from user 
+	    	<where>
+	    		<if test="null!=gradeId">
+	    			grade_id = #{gradeId}
+	    		</if>
+	    		<if test="null!=name">
+	    			and name like #{name}
+	    		</if>
+	    		<if test="null!=state">
+	    			and state = #{state}
+	    		</if>
+	    	</where>
+	  </select>
+	  
+	  <select id="searchUserByParams05" parameterType="Map" resultType="user">
+	    select * from user 
+	    	<if test="null!=gradeIds">
+	    		where grade_id in 
+	    		<foreach item="gradeId" collection="gradeIds" open="(" separator="," close=")">
+	    			#{gradeId}
+	    		</foreach>
+	    	</if>
+	  </select>
+	  
+	  <update id="updateUser" parameterType="User">
+	    update user 
+	    	<set>
+	    		<if test="null!=name">
+	    			name=#{name},
+	    		</if>
+	    		<if test="null!=mobile">
+	    			mobile=#{mobile},
+	    		</if>
+	    		<if test="null!=state">
+	    			state=#{state},
+	    		</if>
+	    	</set>
+	    where id = #{id}
+	  </update>
+	  
+</mapper>

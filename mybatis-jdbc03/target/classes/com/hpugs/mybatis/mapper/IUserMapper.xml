@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hpugs.mybatis.mapper.IUserMapper">
+  <insert id="add" parameterType="User">
+  	insert into user (name, mobile, email, pwd, birthday, address, state) values (#{name}, #{mobile}, #{email}, #{pwd}, #{birthday}, #{address}, #{state}) 
+  </insert>
+  
+  <update id="update" parameterType="User">
+  	update user set name=#{name}, mobile=#{mobile}, email=#{email}, pwd=#{pwd}, birthday=#{birthday}, address=#{address}, state=#{state} where id=#{id}
+  </update>
+  
+  <delete id="del" parameterType="Integer">
+  	delete from user where id=#{id}
+  </delete>
+	
+  <select id="select" parameterType="Integer" resultType="User">
+    select * from user where id = #{id}
+  </select>
+  
+  <select id="findList" resultMap="users">
+  	select * from user
+  </select>
+  
+  <resultMap type="User" id="users">
+  	<id property="id" column="id"/>
+  	<id property="name" column="name"/>
+  	<id property="phone" column="phone"/>
+  	<id property="mobile" column="mobile"/>
+  	<id property="email" column="email"/>
+  	<id property="pwd" column="pwd"/>
+  	<id property="birthday" column="birthday"/>
+  	<id property="address" column="address"/>
+  	<id property="state" column="state"/>
+  	<id property="remark" column="remark"/>
+  </resultMap>
+</mapper>
